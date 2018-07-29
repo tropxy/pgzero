@@ -1,7 +1,7 @@
 import sys
 import operator
 import time
-
+import datetime
 import pygame
 import pgzero.clock
 import pgzero.keyboard
@@ -46,6 +46,18 @@ class PGZeroGame:
         self.icon = None
         self.keyboard = pgzero.keyboard.keyboard
         self.handlers = {}
+
+    @property
+    def get_game_time_secs(self):
+        """
+        Total runtime of the game
+        :return: time elapsed in seconds
+        """
+        return pygame.time.get_ticks() / 1000.0
+
+    @property
+    def get_game_clock(self):
+        return str(datetime.timedelta(seconds=self.get_game_time_secs))
 
     def reinit_screen(self):
         """Reinitialise the window.
@@ -256,3 +268,7 @@ class PGZeroGame:
                 draw()
                 pygame.display.flip()
                 self.need_redraw = False
+
+
+
+
